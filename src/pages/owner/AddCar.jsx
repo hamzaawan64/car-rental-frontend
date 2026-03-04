@@ -27,6 +27,11 @@ const AddCar = () => {
   e.preventDefault();
   if(isLoading) return null
 
+  if(!image) {
+    toast.error("Please upload a car image!")
+    return null
+  }
+
   setIsLoading(true)
   try{
     const formData = new FormData()
@@ -81,7 +86,8 @@ const AddCar = () => {
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_icon}
               alt=""
-              className="h-14 rounded cursor-pointer"
+              className={`h-14 rounded cursor-pointer 
+              ${!image ? 'border-2 border-dashed border-red-300' : ''}`}
             />
             <input
               type="file"
